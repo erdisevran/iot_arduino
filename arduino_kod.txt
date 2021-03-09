@@ -1,0 +1,92 @@
+#include <ESP8266WiFi.h>
+#include "FirebaseESP8266.h"
+
+#define FIREBASE_HOST "iotarduino-f2ec6-default-rtdb.firebaseio.com"
+#define FIREBASE_AUTH "DNcJ6odHgvQbKkwHC9w9vjCzn6nCXs9KN2zIZZy8"
+#define WIFI_SSID "Sevran"
+#define WIFI_PASSWORD  "z08M9ksO"
+
+// #define DHTPIN 13  //be careful the pin no. on the nodeMcu and arduino ide differ 
+// #define DHTTYPE DHT11 //specifying the type of sensor
+
+//  DHT dht(DHTPIN,DHTTYPE);
+
+  String myString;
+//2. veritabanim adında bir firebase veritabanı nesnesi oluşturuyoruz
+FirebaseData veritabanim;
+
+WiFiClient client; 
+// unsigned long previousMillis=0;//for adding a timelimit after which the data will be read
+// const long interval=10000;
+
+bool light;
+float h;
+float t;
+
+void setup() 
+{
+  
+  pinMode(D0,OUTPUT);//specifying D1 as an output pin
+  Serial.begin(9600);
+  delay(10);
+               
+
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  Serial.print("Ağ Bağlantısı Oluşturuluyor");
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    Serial.print(".");
+    delay(300);
+  }
+  Serial.println();
+  Serial.print("IP adresine bağlanıldı: ");
+  Serial.println(WiFi.localIP());
+  Serial.println();
+
+  //3. Firebase bağlantısı başlatılıyor
+  Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
+
+//   dht.begin();
+
+  //4. Ağ bağlantısı kesilirse tekrar bağlanmasına izin veriyoruz
+  Firebase.reconnectWiFi(true);
+}
+
+  void readDatas(){
+      ++h;
+      ++t;
+   // float h=dht.readHumidity(); 
+   // float t=dht.readTemperature(); 
+    Serial.println(h); 
+    Serial.println(t); 
+     Firebase.setFloat(veritabanim, "Veri/Temperature",t);
+     Firebase.setFloat(veritabanim, "Veri/Humidity",h);
+ }
+
+     
+void loop() 
+{      
+     Serial.println("loop geldi");
+ 
+     Firebase.getBool(veritabanim, "/LightState/switch", light);
+    
+    if(light == 1)
+    {
+      digitalWrite(D0,HIGH);
+      Serial.println("yandı");
+    }
+      else
+      {
+        digitalWrite(D0,LOW);
+      Serial.println("söndü");
+      } 
+      delay(1000);
+      
+//  unsigned long currentMillis=millis();
+// if(currentMillis- previousMillis>=interval){//to avoid reading the data from DHT // sensor every second
+// readDatas();
+// previousMillis=currentMillis;
+} 
+
+
+ 
