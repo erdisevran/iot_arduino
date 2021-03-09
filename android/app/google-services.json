@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "838767099742",
+    "project_id": "iotarduino-f2ec6",
+    "storage_bucket": "iotarduino-f2ec6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838767099742:android:e56fe5944fa4c5a7f659cf",
+        "android_client_info": {
+          "package_name": "com.example.iot_arduino"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "838767099742-f5db79tkh7r4fv2l8tm5dahjhjq05nle.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.iot_arduino",
+            "certificate_hash": "6f9fe23b35a16b69efd800f329233f883701e926"
+          }
+        },
+        {
+          "client_id": "838767099742-4pb50336li1ha8ptq6glej6ka9ae6slt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUN9xikmbu6elAIqzYK3s_CFgzmyz-1yE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "838767099742-4pb50336li1ha8ptq6glej6ka9ae6slt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
